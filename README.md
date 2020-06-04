@@ -1,4 +1,4 @@
-# Django Starter Template (version 3.1a1)
+# Django Starter Template (Django version 3.1a1)
 This repository is for Django project boilerplate. It contains development and production ready environment.
 
 ## What this starter offers?
