@@ -6,9 +6,9 @@ from core.settings.shared import *
 SECRET_KEY = environ.get("DJANGO_SECRET_KEY", None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = environ.get("DJANGO_DEBUG", False)
+DEBUG = bool(int(environ.get("DJANGO_DEBUG", 0)))
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
