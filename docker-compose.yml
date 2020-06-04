@@ -1,0 +1,32 @@
+version: "3.2"
+
+services:
+
+  application:
+    build: .
+    restart: on-failure
+    command: >
+      sh -c "pipenv run python manage.py collectstatic --noinput --settings=core.settings.production &&
+             pipenv run python manage.py migrate --settings=core.settings.production &&
+             pipenv run gunicorn core.wsgi:application --bind 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    volumes:
+      - static:/staticfiles
+      - media:/mediafiles
+    env_file:
+      - application.env
+
+  database:
+    image: postgres:12.2-alpine
+    volumes:
+      - postgres_data:/var/lib/postrgesql/data/
+    env_file:
+      - database.env
+
+volumes:
+  postgres_data:
+  static:
+  media:
